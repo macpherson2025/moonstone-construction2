@@ -54,15 +54,21 @@ export async function onRequestPost({ request, env }) {
       })
     });
 
-    if (!response.ok) {
-  const details = await response.text();
+        if (!response.ok) {
+      const details = await response.text();
 
-  console.error("Resend API error:", {
-    status: response.status,
-    details
-  });
+      console.error("Resend API error:", {
+        status: response.status,
+        details
+      });
 
-  return json({ error: "Unable to send your message." }, 502);
-}
+      return json({ error: "Unable to send your message." }, 502);
+    }
+
+    return json({ success: true });
+
+  } catch (error) {
+    console.error("Contact form error:", error);
+    return json({ error: "Unable to process your request." }, 500);
   }
 }
