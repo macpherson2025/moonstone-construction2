@@ -1,2 +1,19 @@
 Documents/
 
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+
+# Backups and temporary files
+*.bak
+*.pre-lightbox
+*.before-*
+*~
+*.swp
+
+# Local development
+node_modules/
+.wrangler/
+.DS_Store
