@@ -55,13 +55,14 @@ export async function onRequestPost({ request, env }) {
     });
 
     if (!response.ok) {
-      console.error("Resend rejected email:", response.status);
-      return json({ error: "Unable to send your message." }, 502);
-    }
+  const details = await response.text();
 
-    return json({ success: true });
-  } catch (error) {
-    console.error("Contact form error:", error);
-    return json({ error: "Unable to process your request." }, 500);
+  console.error("Resend API error:", {
+    status: response.status,
+    details
+  });
+
+  return json({ error: "Unable to send your message." }, 502);
+}
   }
 }
